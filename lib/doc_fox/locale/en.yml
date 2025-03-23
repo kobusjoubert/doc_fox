@@ -1,0 +1,20 @@
+en:
+  activemodel:
+    errors:
+      # The values :model, :attribute and :value are always available for interpolation.
+      # The value :count is available when applicable. Can be used for pluralization.
+      models:
+        doc_fox/base_service:
+          bad_request: 'Bad Request'
+          client_error: 'Client Error'
+          conflict: 'Conflict'
+          forbidden: 'Forbidden'
+          gateway_timeout: 'Gateway Timeout'
+          not_found: 'Not Found'
+          not_acceptable: 'Not Acceptable'
+          proxy_authentication_required: 'Proxy Authentication Required'
+          request_timeout: 'Request Timeout'
+          server_error: 'Server Error'
+          too_many_requests: 'Too Many Requests'
+          unauthorized: 'Unauthorized'
+          unprocessable_entity: 'Unprocessable Entity'
