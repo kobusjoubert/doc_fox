@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "doc_fox/version"
+require_relative 'doc_fox/version'
 
 module DocFox
   class Error < StandardError; end
