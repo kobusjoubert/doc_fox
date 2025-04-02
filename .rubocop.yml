@@ -32,9 +32,16 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Enabled: false
 
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - lib/doc_fox/concerns/enumerable.rb
 
 Metrics/MethodLength:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - lib/active_call-doc_fox.rb
 
 Naming/MemoizedInstanceVariableName:
   EnforcedStyleForLeadingUnderscores: required

@@ -3,7 +3,7 @@
 require_relative 'lib/doc_fox/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'doc_fox'
+  spec.name = 'active_call-doc_fox'
   spec.version = DocFox::VERSION
   spec.authors = ['Kobus Joubert']
   spec.email = ['kobus@translate3d.com']
@@ -34,8 +34,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'active_call', '~> 0.2'
-  spec.add_dependency 'faraday', '~> 2.0'
-  spec.add_dependency 'faraday-retry', '~> 2.0'
-  spec.add_dependency 'faraday-logging-color_formatter', '~> 0.2'
+  spec.add_dependency 'active_call-api', '~> 0.1'
+  spec.add_dependency 'openssl', '~> 3.3'
 end

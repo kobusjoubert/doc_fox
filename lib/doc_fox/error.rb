@@ -38,6 +38,9 @@ module DocFox
   # 409
   class ConflictError < ClientError; end
 
+  # 410
+  class GoneError < ClientError; end
+
   # 422
   class UnprocessableEntityError < ClientError; end
 
@@ -46,6 +49,18 @@ module DocFox
 
   # 500..599
   class ServerError < RequestError; end
+
+  # 500
+  class InternalServerError < ServerError; end
+
+  # 501
+  class NotImplementedError < ServerError; end
+
+  # 502
+  class BadGatewayError < ServerError; end
+
+  # 503
+  class ServiceUnavailableError < ServerError; end
 
   # 504
   class GatewayTimeoutError < ServerError; end
