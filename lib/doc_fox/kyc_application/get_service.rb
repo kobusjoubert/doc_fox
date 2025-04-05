@@ -3,11 +3,11 @@
 class DocFox::KycApplication::GetService < DocFox::BaseService
   attr_reader :id, :params
 
+  validates :id, presence: true
+
   after_call :set_facade
 
   delegate_missing_to :@facade
-
-  validates :id, presence: true
 
   def initialize(id:, params: {})
     @id     = id

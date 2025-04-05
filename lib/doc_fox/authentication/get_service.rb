@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DocFox::Authentication::GetService < DocFox::BaseService
+  skip_callback :call, :before, :set_access_token
+
   after_call :set_facade
 
   delegate_missing_to :@facade
@@ -22,7 +24,6 @@ class DocFox::Authentication::GetService < DocFox::BaseService
 
   def connection
     @_connection ||= Faraday.new do |conn|
-      conn.adapter Faraday.default_adapter
       conn.url_prefix = base_url
       conn.headers['X-Client-Api-Key'] = api_key
       conn.request :json
@@ -32,6 +33,7 @@ class DocFox::Authentication::GetService < DocFox::BaseService
         logger.filter(/(X-Client-Api-Key:).*"(.+)."/i, '\1 [FILTERED]')
         logger.filter(/"nonce":"([^"]+)"/i, '"nonce":"[FILTERED]"')
       end
+      conn.adapter Faraday.default_adapter
     end
   end
 

@@ -19,6 +19,10 @@ Layout/HashAlignment:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
 
+Layout/LineLength:
+  AllowedPatterns:
+    - initialize
+
 Lint/MissingSuper:
   Enabled: false
 
@@ -38,6 +42,10 @@ Metrics/CyclomaticComplexity:
 
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - lib/doc_fox/concerns/enumerable.rb
 
 Naming/FileName:
   Exclude:

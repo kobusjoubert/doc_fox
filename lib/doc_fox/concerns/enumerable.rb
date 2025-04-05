@@ -40,6 +40,8 @@ module DocFox::Enumerable
           throw :list_end
         end
 
+        throw :list_end unless response.body
+
         response.body['data'].each do |hash|
           yield facade_klass.new(hash)
           total += 1

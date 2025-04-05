@@ -7,6 +7,8 @@ class DocFox::AccessToken::GetService < DocFox::BaseService
     errors.merge!(authentication_service.errors) unless authentication_service.success?
   end
 
+  skip_callback :call, :before, :set_access_token
+
   before_call :authenticate
 
   after_call :set_facade
@@ -30,7 +32,6 @@ class DocFox::AccessToken::GetService < DocFox::BaseService
 
   def connection
     @_connection ||= Faraday.new do |conn|
-      conn.adapter Faraday.default_adapter
       conn.url_prefix = base_url
       conn.headers['X-Client-Api-Key'] = api_key
       conn.headers['X-Client-Signature'] = signature
@@ -42,6 +43,7 @@ class DocFox::AccessToken::GetService < DocFox::BaseService
         logger.filter(/(X-Client-Signature:).*"(.+)."/i, '\1 [FILTERED]')
         logger.filter(/"token":"([^"]+)"/i, '"token":"[FILTERED]"')
       end
+      conn.adapter Faraday.default_adapter
     end
   end
 

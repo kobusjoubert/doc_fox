@@ -11,9 +11,7 @@ DocFox exposes the [nCino KYC DocFox API](https://www.docfoxapp.com/api/v2/docum
   - [Using call!](#using-call!)
   - [When to use call or call!](#using-call-or-call!)
   - [Using lists](#using-lists)
-  - [KYC Applications](#kyc-applications)
-  - [KYC Entity Templates](#kyc-entity-templates)
-  - [Users](#users)
+- [Service Objects](#service-objects)
 - [Development](#development)
 - [Contributing](#contributing)
 - [License](#license)
@@ -205,6 +203,11 @@ end
 
 If you don't provide the `per_page` argument, multiple API requests will be made untill all records have been returned. You could be rate limited, so use wisely.
 
+## Service Objects
+
+<details open>
+<summary>KYC Applications</summary>
+
 ### KYC Applications
 
 #### List KYC applications
@@ -296,6 +299,11 @@ service = DocFox::KycApplication::UnarchiveService.call(id: '', reason: '')
 service = DocFox::KycApplication::DeleteService.call(id: '')
 ```
 
+</details>
+
+<details>
+<summary>KYC Entity Templates</summary>
+
 ### KYC Entity Templates
 
 #### List KYC entity templates
@@ -318,6 +326,11 @@ service.profile_schema
 ...
 ```
 
+</details>
+
+<details>
+<summary>Users</summary>
+
 ### Users
 
 #### List users
@@ -339,6 +352,8 @@ service.last_names
 service.deactivated
 ...
 ```
+
+</details>
 
 ## Development
 
