@@ -15,6 +15,8 @@ class DocFox::KycApplication::CreateService < DocFox::BaseService
 
   # Create a KYC application.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications/post
+  #
   # ==== Examples
   #
   #   service = DocFox::KycApplication::CreateService.call(

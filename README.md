@@ -213,7 +213,9 @@ If you don't provide the `per_page` argument, multiple API requests will be made
 #### List KYC applications
 
 ```ruby
-service = DocFox::KycApplication::ListService.call(page: 1, per_page: 10).each do |facade|
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications/get
+
+DocFox::KycApplication::ListService.call(page: 1, per_page: 10).each do |facade|
   facade.id
 end
 ```
@@ -227,6 +229,8 @@ DocFox::KycApplication::ListService.call(search_term: 'eric.cartman@example.com'
 #### Get a KYC application
 
 ```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D/get
+
 service = DocFox::KycApplication::GetService.call(id: '')
 service.id
 service.approved_at
@@ -248,7 +252,9 @@ service.included
 #### Create a KYC application
 
 ```ruby
-service = DocFox::KycApplication::CreateService.call(
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications/post
+
+DocFox::KycApplication::CreateService.call(
   data: {
     type: 'kyc_application',
     attributes: {
@@ -266,37 +272,49 @@ service = DocFox::KycApplication::CreateService.call(
 #### Approve a KYC application
 
 ```ruby
-service = DocFox::KycApplication::ApproveService.call(id: '')
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1approve/patch
+
+DocFox::KycApplication::ApproveService.call(id: '')
 ```
 
 #### Unapprove a KYC application
 
 ```ruby
-service = DocFox::KycApplication::UnapproveService.call(id: '', reason: '')
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1unapprove/patch
+
+DocFox::KycApplication::UnapproveService.call(id: '', reason: '')
 ```
 
 #### Transfer a KYC application
 
 ```ruby
-service = DocFox::KycApplication::TransferService.call(id: '', transfer_to_user_id: '')
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1transfer/patch
+
+DocFox::KycApplication::TransferService.call(id: '', transfer_to_user_id: '')
 ```
 
 #### Archive a KYC application
 
 ```ruby
-service = DocFox::KycApplication::ArchiveService.call(id: '', reason: '')
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1archive/post
+
+DocFox::KycApplication::ArchiveService.call(id: '', reason: '')
 ```
 
 #### Unarchive a KYC application
 
 ```ruby
-service = DocFox::KycApplication::UnarchiveService.call(id: '', reason: '')
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1unarchive/post
+
+DocFox::KycApplication::UnarchiveService.call(id: '', reason: '')
 ```
 
 #### Delete a KYC application
 
 ```ruby
-service = DocFox::KycApplication::DeleteService.call(id: '')
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D/delete
+
+DocFox::KycApplication::DeleteService.call(id: '')
 ```
 
 </details>
@@ -309,7 +327,9 @@ service = DocFox::KycApplication::DeleteService.call(id: '')
 #### List KYC entity templates
 
 ```ruby
-service = DocFox::KycEntityTemplate::ListService.call(page: 1, per_page: 10).each do |facade|
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Entity-Templates/paths/~1api~1v2~1kyc_entity_templates/get
+
+DocFox::KycEntityTemplate::ListService.call(page: 1, per_page: 10).each do |facade|
   facade.id
 end
 ```
@@ -317,6 +337,8 @@ end
 #### Get a KYC entity template
 
 ```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Entity-Templates/paths/~1api~1v2~1kyc_entity_templates~1%7Bkyc_entity_template_id%7D/get
+
 service = DocFox::KycEntityTemplate::GetService.call(id: '')
 service.id
 service.kyc_entity_type_name
@@ -336,7 +358,9 @@ service.profile_schema
 #### List users
 
 ```ruby
-service = DocFox::User::ListService.call(page: 1, per_page: 10).each do |facade|
+# https://www.docfoxapp.com/api/v2/documentation#tag/Users/paths/~1api~1v2~1users/get
+
+DocFox::User::ListService.call(page: 1, per_page: 10).each do |facade|
   facade.id
 end
 ```
@@ -344,6 +368,8 @@ end
 #### Get a user
 
 ```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Users/paths/~1api~1v2~1users~1%7Buser_id%7D/get
+
 service = DocFox::User::GetService.call(id: '')
 service.id
 service.email

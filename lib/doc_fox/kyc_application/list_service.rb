@@ -7,6 +7,8 @@ class DocFox::KycApplication::ListService < DocFox::BaseService
 
   # List KYC applications.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications/get
+  #
   # ==== Examples
   #
   #   service = DocFox::KycApplication::ListService.call.first

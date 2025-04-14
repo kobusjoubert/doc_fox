@@ -11,6 +11,8 @@ class DocFox::KycApplication::DeleteService < DocFox::BaseService
 
   # Delete a KYC application.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D/delete
+  #
   # ==== Examples
   #
   #   service = DocFox::KycApplication::DeleteService.call(id: '')

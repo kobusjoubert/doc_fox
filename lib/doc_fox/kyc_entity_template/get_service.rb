@@ -15,6 +15,8 @@ class DocFox::KycEntityTemplate::GetService < DocFox::BaseService
 
   # Get a KYC application.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Entity-Templates/paths/~1api~1v2~1kyc_entity_templates~1%7Bkyc_entity_template_id%7D/get
+  #
   # ==== Examples
   #
   #   service = DocFox::KycEntityTemplate::GetService.call(id: '')

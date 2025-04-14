@@ -9,6 +9,8 @@ class DocFox::Authentication::GetService < DocFox::BaseService
 
   # Get access token.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/Authentication/paths/~1api~1v2~1authentications~1new/get
+  #
   # ==== Examples
   #
   #   service = DocFox::Authentication::GetService.call

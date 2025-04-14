@@ -15,6 +15,8 @@ class DocFox::User::GetService < DocFox::BaseService
 
   # Get a user.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/Users/paths/~1api~1v2~1users~1%7Buser_id%7D/get
+  #
   # ==== Examples
   #
   #   service = DocFox::User::GetService.call(id: '')

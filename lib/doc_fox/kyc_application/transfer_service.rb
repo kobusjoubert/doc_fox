@@ -16,6 +16,8 @@ class DocFox::KycApplication::TransferService < DocFox::BaseService
 
   # Transfer a KYC application.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Applications/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1transfer/patch
+  #
   # ==== Examples
   #
   #   service = DocFox::KycApplication::TransferService.call(id: '', transfer_to_user_id: '')

@@ -5,6 +5,8 @@ class DocFox::User::ListService < DocFox::BaseService
 
   # List users.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/Users/paths/~1api~1v2~1users/get
+  #
   # ==== Examples
   #
   #   service = DocFox::User::ListService.call.first

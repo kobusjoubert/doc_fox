@@ -5,6 +5,8 @@ class DocFox::KycEntityTemplate::ListService < DocFox::BaseService
 
   # List KYC entity templates.
   #
+  # https://www.docfoxapp.com/api/v2/documentation#tag/KYC-Entity-Templates/paths/~1api~1v2~1kyc_entity_templates/get
+  #
   # ==== Examples
   #
   #   service = DocFox::KycEntityTemplate::ListService.call.first
