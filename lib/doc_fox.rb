@@ -3,6 +3,7 @@
 require 'active_call'
 require 'active_call/api'
 require 'active_support/core_ext/time'
+require 'faraday/follow_redirects'
 
 loader = Zeitwerk::Loader.for_gem
 loader.ignore("#{__dir__}/active_call-doc_fox.rb")

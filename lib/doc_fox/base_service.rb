@@ -61,6 +61,7 @@ class DocFox::BaseService < ActiveCall::Base
       conn.request :json
       conn.request :retry
       conn.response :json
+      conn.response :follow_redirects
       conn.response :logger, logger, **logger_options do |logger|
         logger.filter(/(Authorization:).*"(.+)."/i, '\1 [FILTERED]')
       end

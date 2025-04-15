@@ -35,5 +35,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'active_call-api', '~> 0.1'
+  spec.add_dependency 'faraday-follow_redirects', '~> 0.3'
   spec.add_dependency 'openssl', '~> 3.3'
 end
