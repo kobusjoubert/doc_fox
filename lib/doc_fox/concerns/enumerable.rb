@@ -31,7 +31,7 @@ module DocFox::Enumerable
 
     catch :list_end do
       loop do
-        @response = connection.get(path, params)
+        @response = connection.get(path, **params)
         validate(:response)
 
         unless success?

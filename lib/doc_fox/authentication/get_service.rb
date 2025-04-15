@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DocFox::Authentication::GetService < DocFox::BaseService
+  validates :api_key, presence: true
+
   skip_callback :call, :before, :set_access_token
 
   after_call :set_facade

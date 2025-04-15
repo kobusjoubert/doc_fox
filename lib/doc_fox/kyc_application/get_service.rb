@@ -43,7 +43,7 @@ class DocFox::KycApplication::GetService < DocFox::BaseService
   #
   # GET /api/v2/kyc_applications/:id
   def call
-    connection.get("kyc_applications/#{id}", params)
+    connection.get("kyc_applications/#{id}", **params)
   end
 
   private
