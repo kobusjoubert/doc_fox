@@ -244,6 +244,8 @@ service.relationships.dig('data_requirements', 'links', 'related')
 
 Include related resources.
 
+`managed_by`, `profile.additional_details`, `profile.addresses`, `profile.contacts`, `profile.names`, `profile.numbers`, `parent_related_entities`, `onboarding_token_summary`, `onboarding_token_summary.status_summaries`, `onboarding_token_summary.data_requirement_summaries`, `onboarding_token_summary.kyc_entity_template_designation_schema`, `onboarding_token_summary.parent_related_entity_designation_summary`, `onboarding_token_summary.parent_onboarding_token_summary`, `onboarding_token_summary.relationship_builder_config`
+
 ```ruby
 service = DocFox::KycApplication::GetService.call(id: '', params: { include: 'managed_by,profile.names' })
 service.included
@@ -320,6 +322,126 @@ DocFox::KycApplication::DeleteService.call(id: '')
 </details>
 
 <details>
+<summary>Status Summaries</summary>
+
+### Status Summaries
+
+#### Get a status summary of a KYC application
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Status-Summaries/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1status_summaries/get
+
+service = DocFox::StatusSummary::GetService.call(id: '')
+service.id
+service.overall_kyc_application_status
+service.module_statuses
+...
+```
+
+</details>
+
+<details>
+<summary>Profiles</summary>
+
+### Profiles
+
+#### List profiles
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Profiles/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1profiles/get
+
+DocFox::Profile::ListService.call(kyc_application_id: '', page: 1, per_page: 10).each do |facade|
+  facade.id
+end
+```
+
+#### Get a profile
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Profiles/paths/~1api~1v2~1profiles~1%7Bprofile_id%7D/get
+
+service = DocFox::Profile::GetService.call(id: '')
+service.id
+service.created_at
+...
+```
+
+Include related resources.
+
+`additional_details`, `addresses`, `contacts`, `contacts.invitation_tokens`, `names`, `numbers`
+
+```ruby
+service = DocFox::Profile::GetService.call(id: '', params: { include: 'names,numbers,additional_details' })
+service.included
+```
+
+</details>
+
+<details>
+<summary>Data Requirements</summary>
+
+### Data Requirements
+
+#### List data requirements
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Data-Requirements/paths/~1api~1v2~1kyc_applications~1%7Bkyc_application_id%7D~1data_requirements/get
+
+DocFox::DataRequirement::ListService.call(kyc_application_id: '', page: 1, per_page: 10).each do |facade|
+  facade.id
+end
+```
+
+List only data requirements for forms.
+
+```ruby
+DocFox::DataRequirement::ListService.call(kyc_application_id: '', forms: true).map { _1 }
+```
+
+#### List data requirements associated with an account application
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Data-Requirements/paths/~1api~1v2~1account_applications~1%7Baccount_application_id%7D~1data_requirements/get
+
+DocFox::DataRequirement::ListService.call(account_application_id: '', page: 1, per_page: 10).each do |facade|
+  facade.id
+end
+```
+
+List only data requirements for forms.
+
+```ruby
+DocFox::DataRequirement::ListService.call(account_application_id: '', forms: true).map { _1 }
+```
+
+#### Get a data requirement
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Data-Requirements/paths/~1api~1v2~1data_requirements~1%7Bdata_requirement_id%7D/get
+
+service = DocFox::DataRequirement::GetService.call(id: '')
+service.id
+service.created_at
+service.form
+service.name
+service.required
+service.slug
+service.valid_evidence_types
+...
+```
+
+Include related resources.
+
+`evidence_submissions`, `active_evidence_submission`, `active_evidence_submission.form`, `active_evidence_submission.form.active_form_datum`
+
+```ruby
+service = DocFox::DataRequirement::GetService.call(id: '', params: { include: 'evidence_submissions,active_evidence_submission' })
+service.included
+```
+
+</details>
+
+<details>
 <summary>KYC Entity Templates</summary>
 
 ### KYC Entity Templates
@@ -347,6 +469,271 @@ service.created_at
 service.profile_schema
 ...
 ```
+
+</details>
+
+<details>
+<summary>Evidence Submissions</summary>
+
+### Evidence Submissions
+
+#### List evidence submissions
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Evidence-Submissions/paths/~1api~1v2~1data_requirements~1%7Bdata_requirement_id%7D~1evidence_submissions/get
+
+DocFox::EvidenceSubmission::ListService.call(data_requirement_id: '', page: 1, per_page: 10).each do |facade|
+  facade.id
+end
+```
+
+#### Get an evidence submission
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Evidence-Submissions/paths/~1api~1v2~1evidence_submissions~1%7Bevidence_submission_id%7D/get
+
+service = DocFox::EvidenceSubmission::GetService.call(id: '')
+service.id
+service.evidence_type
+service.form
+service.status
+service.created_at
+service.attributes
+...
+```
+
+Include related resources.
+
+`document`: the related document, for document evidence submission  
+`qualitative_checks`: the related qualitative checks, for document evidence submission  
+`rejection_reasons`: the related rejection reasons  
+`form`: the related form, for form evidence submission  
+`form.active_form_datum`: the related form and its latest data submission, for form evidence submission
+
+```ruby
+service = DocFox::EvidenceSubmission::GetService.call(id: '', params: { include: 'document,qualitative_checks' })
+service.included
+```
+
+#### Update an evidence submission
+
+At the moment this is used only to add third party data to an external evidence submission for a specific third party provider.
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Evidence-Submissions/paths/~1api~1v2~1evidence_submissions~1%7Bevidence_submission_id%7D/patch
+
+DocFox::EvidenceSubmission::UpdateService.call(
+  id: '',
+  data: {
+    type: 'evidence_submission',
+    id: '',
+    attributes: {
+      results: {
+        dob: '1984-01-01',
+        gender: 'M',
+        surname: 'Cartman',
+        forename1: 'Eric',
+        forename2: nil,
+        id_number: '8401017223183',
+        addresses: {
+          address: [
+            {
+              addr_type: 'R',
+              addr_line1: '28201 E. Bonanza St.',
+              addr_line2: '',
+              addr_line3: '',
+              addr_line4: 'South Park',
+              addr_postal_code: '8000',
+              addr_update_date: '2017-11-21'
+            }
+          ]
+        },
+        telephones: {
+          telephone: [
+            {
+              tel_num: '27715555555',
+              tel_type: 'Cell',
+              tel_update_date: '2017-09-05'
+            }
+          ]
+        },
+        deceased_date: nil,
+        deceased_flag: 'N',
+        verified_date: '2015-06-23',
+        verified_flag: 'Y',
+        deceased_reason: nil
+      }
+    }
+  }
+)
+```
+
+#### Reject an active evidence submission
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Evidence-Submissions/paths/~1api~1v2~1evidence_submissions~1%7Bevidence_submission_id%7D~1reject/patch
+
+DocFox::EvidenceSubmission::RejectService.call(id: '', reason: '')
+```
+
+#### Approve an active evidence submission
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Evidence-Submissions/paths/~1api~1v2~1evidence_submissions~1%7Bevidence_submission_id%7D~1approve/patch
+
+DocFox::EvidenceSubmission::ApproveService.call(id: '')
+```
+
+#### Replace an active evidence submission
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Evidence-Submissions/paths/~1api~1v2~1evidence_submissions~1%7Bevidence_submission_id%7D~1replace/patch
+
+DocFox::EvidenceSubmission::ReplaceService.call(id: '')
+```
+
+</details>
+
+<details>
+<summary>Documents</summary>
+
+### Documents
+
+#### List documents
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Documents/paths/~1api~1v2~1evidence_submissions~1%7Bevidence_submission_id%7D~1documents/get
+
+DocFox::Document::ListService.call(evidence_submission_id: '', page: 1, per_page: 10).each do |facade|
+  facade.id
+end
+```
+
+#### Get a document
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Documents/paths/~1api~1v2~1documents~1%7Bdocument_id%7D/get
+
+service = DocFox::Document::GetService.call(id: '')
+service.id
+service.created_at
+service.content_type
+service.filename
+service.token
+service.token_expiry
+service.uploaded_by
+...
+```
+
+Include related resources.
+
+`evidence_submissions`
+
+```ruby
+service = DocFox::Document::GetService.call(id: '', params: { include: 'evidence_submissions' })
+service.included
+```
+
+</details>
+
+<details>
+
+<summary>Document Tokens</summary>
+
+### Document Tokens
+
+#### List document tokens
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Document-Tokens/paths/~1api~1v2~1documents~1%7Bdocument_id%7D~1document_tokens/get
+
+DocFox::DocumentToken::ListService.call(document_id: '', page: 1, per_page: 10).each do |facade|
+  facade.id
+end
+```
+
+#### Get a document token
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Document-Tokens/paths/~1api~1v2~1document_tokens~1%7Bdocument_token_id%7D/get
+
+service = DocFox::DocumentToken::GetService.call(id: '')
+service.id
+service.created_at
+service.expiry
+service.content_type
+...
+```
+
+#### Create a document token
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Document-Tokens/paths/~1api~1v2~1documents~1%7Bdocument_id%7D~1document_tokens/post
+
+DocFox::DocumentToken::CreateService.call(
+  document_id: '',
+  data: {
+    type: 'document_token'
+  }
+)
+```
+
+</details>
+
+<details>
+
+<summary>Download Documents</summary>
+
+### Download Documents
+
+#### Download a document file
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Download-Documents/paths/~1api~1v2~1document_file_downloads~1%7Bdocument_token_id%7D/get
+
+service = DocFox::Document::DownloadService.call(document_token_id: '', content_type: 'image/jpeg')
+service.response.body # => "\xFF\xD8\xFF\xDB\x00\x84\x00\x04\x05\x..."
+```
+
+Possible values for `content_type`.
+
+- `image/jpeg`
+- `image/png`
+- `application/pdf`
+
+You can also provide just the `document_id` and the service will automatically request the `document_token_id` and `content_type` for you.
+
+```ruby
+service = DocFox::Document::DownloadService.call(document_id: '')
+service.response.body # => "\xFF\xD8\xFF\xDB\x00\x84\x00\x04\x05\x..."
+```
+
+</details>
+
+<details>
+
+<summary>Document Uploads</summary>
+
+### Document Uploads
+
+#### Upload a document file
+
+```ruby
+# https://www.docfoxapp.com/api/v2/documentation#tag/Document-Uploads/paths/~1api~1v2~1evidence_submissions~1%7Bevidence_submission_id%7D~1documents/post
+
+DocFox::Document::UploadService.call(
+  evidence_submission_id: '',
+  data: {
+    type: 'document',
+    attributes: {
+      evidence_type: 'taxes_paid_in_prior_quarter',
+      filename: 'taxes_paid.png',
+      document_data: "data:image/png;base64,#{Base64.encode64(File.read('/path/to/taxes_paid.png'))}"
+    }
+  }
+)
+```
+</details>
 
 </details>
 
