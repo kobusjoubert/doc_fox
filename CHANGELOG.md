@@ -1,3 +1,7 @@
+## [0.2.1] - 2025-05-09
+
+- README and Gemspec description updates.
+
 ## [0.2.0] - 2025-04-15
 
 - DocFox::StatusSummary service objects
