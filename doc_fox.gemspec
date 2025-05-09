@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ['Kobus Joubert']
   spec.email = ['kobus@translate3d.com']
 
-  spec.summary = 'DocFox'
-  spec.description = 'DocFox exposes the nCino KYC DocFox API endpoints through service objects.'
+  spec.summary = 'DocFox service objects'
+  spec.description = 'DocFox exposes the nCino KYC DocFox API endpoints through Active Call service objects.'
   spec.homepage = 'https://github.com/kobusjoubert/doc_fox'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 3.1.0'
